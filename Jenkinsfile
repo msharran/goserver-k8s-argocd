@@ -1,9 +1,10 @@
 pipeline{
     agent any
     stages{
-        stage("A"){
+        stage("Build"){
             steps{
                 echo "========executing A========"
+                bash 'docker build -t goserverdemo .'
             }
             post{
                 always{
@@ -16,17 +17,6 @@ pipeline{
                     echo "========A execution failed========"
                 }
             }
-        }
-    }
-    post{
-        always{
-            echo "========always========"
-        }
-        success{
-            echo "========pipeline executed successfully ========"
-        }
-        failure{
-            echo "========pipeline execution failed========"
         }
     }
 }
