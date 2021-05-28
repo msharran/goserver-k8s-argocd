@@ -1,22 +1,33 @@
-pipeline{
-    agent any
-    stages{
-        stage("Build"){
-            steps{
-                echo "========executing A========"
-            }
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
-            }
+pipeline {
+  environment {
+    imagename = "sharran/goserverdemo"
+    registryCredential = 'sharran_dockerhub'
+    dockerImage = ''
+  }
+  agent any
+  stages {
+    stage('Building container') {
+      steps{
+        script {
+          dockerImage = docker.build imagename
         }
+      }
     }
+    stage('Pushing to dockerhub') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push("$BUILD_NUMBER")
+            dockerImage.push('latest')
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $imagename:$BUILD_NUMBER"
+        sh "docker rmi $imagename:latest"
+      }
+    }
+  }
 }
-// https://github.com/surendarrajasekaran/EKS-Cluster/blob/master/Jenkinsfile
