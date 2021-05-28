@@ -4,7 +4,6 @@ pipeline{
         stage("Build"){
             steps{
                 echo "========executing A========"
-                bash 'docker build -t goserverdemo .'
             }
             post{
                 always{
@@ -20,3 +19,4 @@ pipeline{
         }
     }
 }
+// https://github.com/surendarrajasekaran/EKS-Cluster/blob/master/Jenkinsfile
