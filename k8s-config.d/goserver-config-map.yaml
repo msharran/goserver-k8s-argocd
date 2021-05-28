@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: goserver-config-map
+  labels:
+    app: goserver
+data:
+  hello_env: Hello From Env
