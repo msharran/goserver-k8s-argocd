@@ -1,7 +1,7 @@
 pipeline {
   environment {
     imagename = "sharran/goserverdemo"
-    registryCredential = 'sharran_dockerhub'
+    registryCredential = 'dockerhub_sharran'
     dockerImage = ''
   }
   agent any
@@ -16,7 +16,7 @@ pipeline {
     stage('Pushing to dockerhub') {
       steps{
         script {
-          docker.withRegistry( 'https://hub.docker.com', registryCredential ) {
+          docker.withRegistry( '', registryCredential ) {
             dockerImage.push("$BUILD_NUMBER")
             dockerImage.push('latest')
           }
