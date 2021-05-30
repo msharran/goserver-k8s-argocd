@@ -26,7 +26,7 @@ func main() {
 // Handler
 func hello(c echo.Context) error {
 	sum := 0
-	for i := 0; i < 1000; i++ {
+	for i := 0; i < 10000; i++ {
 		fmt.Println(i)
 		sum += i
 	}
