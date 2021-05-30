@@ -12,7 +12,7 @@ pipeline {
         sh "curl -sS -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl"
         sh "chmod +x ./kubectl ./aws-iam-authenticator"
         sh "export PATH=$PWD/:$PATH"
-        sh "apk update && apk add install python3 && pip3 install --upgrade awscli"
+        sh "apk update && apk add --no-cache python3 py3-pip && pip3 install --upgrade awscli"
       }
     }
     stage('Build') {
