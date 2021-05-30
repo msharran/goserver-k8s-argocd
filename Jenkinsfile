@@ -18,9 +18,10 @@ pipeline {
         script {
           docker.withRegistry('', registryCredential) {
             dockerImage.push("$BUILD_NUMBER")
-          }
+            dockerImage.push("latest")}
         }
         sh "docker rmi $imagename:$BUILD_NUMBER"
+        sh "docker rmi $imagename:latest"
       }
     }
     stage('Deploying to EKS') {
