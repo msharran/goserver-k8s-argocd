@@ -6,14 +6,14 @@ pipeline {
   }
   agent any
   stages {
-    stage('Build container') {
+    stage('Build') {
       steps{
         script {
           dockerImage = docker.build imagename
         }
       }
     }
-    stage('Push container') {
+    stage('Post-Build') {
       steps{
         script {
           docker.withRegistry('', registryCredential) {
@@ -24,13 +24,21 @@ pipeline {
         sh "docker rmi $imagename:latest"
       }
     }
-    stage('Deploying to EKS') {
+    stage('Pre-Deploy') {
       steps {
-        sh "curl -sS -o aws-iam-authenticator https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-07-26/bin/linux/amd64/aws-iam-authenticator"
-        sh "curl -sS -o kubectl https://amazon-eks.s3-us-west-2.amazonaws.com/1.14.6/2019-08-22/bin/linux/amd64/kubectl"
-        sh "chmod +x ./kubectl ./aws-iam-authenticator"
-        sh "export PATH=$PWD/:$PATH"
-        sh "apk update && apk add --no-cache python3 py3-pip && pip3 install --upgrade awscli"
+          sh 'curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/kubectl'
+          sh 'chmod +x ./kubectl'
+          sh 'mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin'
+          sh 'kubectl version --short --client'
+          sh 'pip install awscli'
+          sh 'curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator'
+          sh 'chmod +x ./aws-iam-authenticator'
+          sh 'mkdir -p $HOME/bin && cp ./aws-iam-authenticator $HOME/bin/aws-iam-authenticator && export PATH=$PATH:$HOME/bin'
+          sh "echo 'export PATH=$PATH:$HOME/bin' >> ~/.bashrc"
+      }
+    }
+    stage('Deploy') {
+      steps {
         dir("k8s-config.d") {
           sh "kubectl apply -f goserver_deployment_service.yaml"
           sh "kubectl get all"
