@@ -1,3 +1,8 @@
-# Jenkins pipeline for Docker build and push
+# Jenkins CICD
 
-Refer pipeline status in the pipeline.png in root directory
+## Contents
+1. CI for building Go server as docker container
+2. Publishing the image to DockerHub
+3. Cleaning up docker images
+4. Deploying the container to EKS cluster
+
