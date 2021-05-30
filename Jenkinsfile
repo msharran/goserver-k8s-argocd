@@ -31,8 +31,10 @@ pipeline {
     }
     stage('changing dir...') {
       steps {
-        sh "cd goserver"
-        sh "ls -l"
+        dir("goserver") {
+          sh "pwd"
+          sh "ls -l"
+        }
       }
     }
   }
