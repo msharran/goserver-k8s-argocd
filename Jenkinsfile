@@ -29,5 +29,11 @@ pipeline {
         sh "docker rmi $imagename:latest"
       }
     }
+    stage('changing dir...') {
+      steps {
+        sh "cd goserver"
+        sh "ls -l"
+      }
+    }
   }
 }
