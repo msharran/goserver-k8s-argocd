@@ -4,4 +4,4 @@ bases:
 commonLabels:
   env: staging
 
-nameSuffix: "-production"
+nameSuffix: "-staging"
