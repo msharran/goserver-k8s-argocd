@@ -1,0 +1,10 @@
+bases:
+  - "../../base"
+
+commonLabels:
+  env: production
+
+patches:
+  - "app.yaml"
+
+nameSuffix: "-production"

@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: goserver
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: k8s/deploy/overlays/staging
+  destination:
+    namespace: staging

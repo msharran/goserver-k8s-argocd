@@ -1,0 +1,10 @@
+bases:
+  - "../../base"
+
+commonLabels:
+  env: staging
+
+patches:
+  - "app.yaml"
+
+nameSuffix: "-staging"
