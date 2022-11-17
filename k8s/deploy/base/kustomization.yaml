@@ -3,4 +3,4 @@ resources:
   - service.yaml
 
 commonAnnotations:
-  verified: true
+  verified: "true"
