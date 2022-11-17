@@ -11,3 +11,6 @@ spec:
     path: k8s/deploy/overlays/staging
   destination:
     server: https://kubernetes.default.svc
+  syncPolicy:
+    automated:
+      prune: true
