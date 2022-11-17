@@ -1,0 +1,7 @@
+bases:
+  - "../../base"
+
+commonLabels:
+  env: production
+
+nameSuffix: "-production"

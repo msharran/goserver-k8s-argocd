@@ -1,0 +1,7 @@
+bases:
+  - "../../base"
+
+commonLabels:
+  env: staging
+
+nameSuffix: "-production"

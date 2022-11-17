@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
 metadata:
-  name: goserver-hpa
+  name: goserver
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: goserver-deployment
+    name: goserver
   minReplicas: 1
   maxReplicas: 4
   metrics:

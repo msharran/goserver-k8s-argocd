@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: goserver-deployment
+  name: goserver
   labels:
     app: goserver
 spec:
@@ -28,17 +28,3 @@ spec:
               cpu: "125m"
           ports:
             - containerPort: 80
----
-#Service configuration
-apiVersion: v1
-kind: Service
-metadata:
-  name: goserver-service
-spec:
-  selector:
-    app: goserver
-  type: LoadBalancer
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
