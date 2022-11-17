@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/msharran/goserver-helloworld.git
+    repoURL: https://github.com/msharran/goserver-k8s-argocd.git
     targetRevision: main
     path: k8s/deploy/overlays/staging
   destination:
