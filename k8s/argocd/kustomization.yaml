@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - github.com/argoproj/argo-cd/manifests/cluster-install?ref=v2.5.2
+# additional resources like ingress rules, cluster and repository secrets.
+resources:
+  - goserver/overlays/staging
+  - goserver/overlays/production
+
+# # changes to config maps
+# patchesStrategicMerge:
+#   - overlays/argo-cd-cm.yaml
+
+namespace: argocd

@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: goserver
   namespace: argocd
+  labels:
+    app: goserver
 spec:
   project: default
   source:
